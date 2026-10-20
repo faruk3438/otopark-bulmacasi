@@ -1,0 +1,7 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>send</title>
+<script>
+  // App Store Connect'e inceleme görselini iletmek için yardımcı sayfa (yalnızca appstoreconnect.apple.com'a gönderir)
+  fetch('shop.png').then(r => r.arrayBuffer()).then(b => parent.postMessage({ png: b }, 'https://appstoreconnect.apple.com'));
+</script>
