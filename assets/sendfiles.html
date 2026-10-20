@@ -1,0 +1,9 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>send</title>
+<script>
+  // Verilen dosyaları App Store Connect sayfasına iletir (yalnızca appstoreconnect.apple.com'a)
+  const files = (new URLSearchParams(location.search).get('f') || '').split(',').filter(Boolean);
+  Promise.all(files.map(f => fetch(f + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.arrayBuffer())))
+    .then(list => parent.postMessage({ files: files.map((f, i) => ({ name: f, buf: list[i] })) }, 'https://appstoreconnect.apple.com'));
+</script>
