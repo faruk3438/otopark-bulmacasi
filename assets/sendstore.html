@@ -1,0 +1,9 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>send</title>
+<script>
+  // App Store Connect'e mağaza ekran görüntülerini iletir (yalnızca appstoreconnect.apple.com'a)
+  const dev = new URLSearchParams(location.search).get('dev') || 'iphone';
+  Promise.all([1, 2, 3, 4, 5].map(i => fetch('store/' + dev + '_' + i + '.png').then(r => r.arrayBuffer())))
+    .then(list => parent.postMessage({ shots: list, dev }, 'https://appstoreconnect.apple.com'));
+</script>
